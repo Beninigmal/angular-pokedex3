@@ -7,19 +7,19 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PokemonListModule } from './components/pokemon-list/pokemon-list.module';
 import { MaterialModule } from './module/material.module';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { FavoritPokemonsComponent } from './components/favorit-pokemons/favorit-pokemons.component';
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent, NavbarComponent, FavoritPokemonsComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     PokemonListModule,
     HttpClientModule,
-    MaterialModule
+    MaterialModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

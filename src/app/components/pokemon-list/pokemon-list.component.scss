@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  justify-content: center;
+  background-color: aliceblue;
+
+  .list-container {
+    max-width: 50%;
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    ap-pokemon-card {
+      margin: 10px;
+    }
+  }
+}
