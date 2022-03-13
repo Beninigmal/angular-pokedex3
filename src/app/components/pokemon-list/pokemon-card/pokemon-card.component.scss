@@ -1,5 +1,5 @@
 .poke-card {
-  max-width: 200px;
+  max-width: 175px;
   border-radius: 15px;
   margin: 10px;
 }
@@ -16,7 +16,6 @@
 }
 
 mat-card-header {
-  // background-color: tomato;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -24,7 +23,9 @@ mat-card-header {
 
 mat-card-title {
   text-align: center;
-  font-family: "Pokemon";
+  font-family: "Nunito", sans-serif;
+  font-weight: 800;
+  font-size: 16px;
 }
 
 .poke_container {
@@ -34,4 +35,10 @@ mat-card-title {
   height: 100vh;
   justify-content: center;
   align-items: center;
+}
+
+pagination-controls {
+  font-family: "Nunito";
+  font-weight: 800;
+
 }

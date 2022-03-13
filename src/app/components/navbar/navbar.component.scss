@@ -1,4 +1,17 @@
-.spacer {
-  flex: 1 1 auto;
-  align-items: center;
+mat-toolbar{
+  background-color: transparent;
+  .anchor-container{
+    text-decoration: none;
+  }
+  position: fixed;
+    .nav-title{
+      font-family: 'Pokemon';
+      font-size: 26px;
+      text-shadow: 0 0 12px rgba(119, 0, 255, 1);
+      color: #fff;
+    }
+  .spacer {
+    flex: 1 1 auto;
+    align-items: center;
+  }
 }

@@ -9,6 +9,7 @@ import { PokemonListModule } from './components/pokemon-list/pokemon-list.module
 import { MaterialModule } from './module/material.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FavoritPokemonsComponent } from './components/favorit-pokemons/favorit-pokemons.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   declarations: [AppComponent, NavbarComponent, FavoritPokemonsComponent],
   imports: [
@@ -18,6 +19,7 @@ import { FavoritPokemonsComponent } from './components/favorit-pokemons/favorit-
     PokemonListModule,
     HttpClientModule,
     MaterialModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent],

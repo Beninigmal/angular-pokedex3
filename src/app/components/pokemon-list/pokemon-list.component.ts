@@ -8,11 +8,15 @@ import { PokeapiService } from 'src/app/services/pokeapi.service';
 })
 export class PokemonListComponent implements OnInit {
   pokemons: any = [];
+  page: number = 1;
+  totalPokemon: number = 0
+
 
   constructor(private pokeApi: PokeapiService) {}
 
   getAllPokemon() {
-    this.pokeApi.getAllPokemon().subscribe((response: any) => {
+    this.pokeApi.getAllPokemon(10, this.page + 0).subscribe((response: any) => {
+      this.totalPokemon = response.count;
       response.results.forEach((result: any) => {
         this.pokeApi
           .getPokemonData(result.name)

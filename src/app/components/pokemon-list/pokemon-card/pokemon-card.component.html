@@ -1,7 +1,7 @@
 <mat-card
   (click)="goPage(pokemon)"
   class="poke-card"
-  *ngFor="let pokemon of pokemonDetail"
+  *ngFor="let pokemon of pokemonDetail  | paginate: {itemsPerPage: 10, currentPage:  page, totalItems: totalPokemon} "
 >
   <mat-card-header>
     <mat-card-title>{{ pokemon.name.toUpperCase() }}</mat-card-title>
@@ -15,6 +15,8 @@
   <img
     mat-card-image
     src="{{ pokemon.sprites.other['official-artwork'].front_default }}"
-    alt="Photo of a Shiba Inu"
+    alt="Pokemon picture"
   />
 </mat-card>
+<pagination-controls previousLabel="Anterior" nextLabel="Próximo" (pageChange)="page = $event; pokemonDetail = []; pokeData()"></pagination-controls>
+
