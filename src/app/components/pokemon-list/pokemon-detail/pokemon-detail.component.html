@@ -1,29 +1,41 @@
 <div class="general__container">
   <div class="container__1">
     <div class="name-container">
-      <h1>Bulbasaur</h1>
+      <h1>{{ pokemonName.toLocaleUpperCase() }}</h1>
     </div>
     <div class="size-container">
-      <span>Peso: 173kg</span>
-      <span>Altura: 10.59cm</span>
+      <span>Peso: {{ pokemonData[0].weight }}kg</span>
+      <span>Altura: {{ pokemonData[0].height }}cm</span>
     </div>
   </div>
   <div class="container__2">
     <img
-      src="https://maurowernly.github.io/Pokedex/images/pokemons/001Bulbasaur.png"
-      alt="aaa"
+      src="{{ pokemonData[0].sprites.other['official-artwork'].front_default }}"
+      alt="{{ pokemonData[0].name }}"
     />
   </div>
   <div class="container__3">
     <div class="container-caracteristics">
       <h2>Atributos:</h2>
       <div class="container-stats">
-        <mat-card>HP: 11</mat-card>
-        <mat-card>ATAQUE: 11</mat-card>
-        <mat-card>DEFENSE: 11</mat-card>
-        <mat-card>VEL. ATAQUE: 11</mat-card>
-        <mat-card>VEL. DEFESA: 11</mat-card>
-        <mat-card>VELOCIDADE: 11</mat-card>
+        <mat-card>HP: {{ this.pokemonData[0].stats[0].base_stat }}</mat-card>
+        <mat-card
+          >ATAQUE: {{ this.pokemonData[0].stats[1].base_stat }}</mat-card
+        >
+        <mat-card
+          >DEFESA: {{ this.pokemonData[0].stats[2].base_stat }}</mat-card
+        >
+        <mat-card
+          >ATAQUE ESPECIAL:
+          {{ this.pokemonData[0].stats[3].base_stat }}</mat-card
+        >
+        <mat-card
+          >DEFESA ESPECIAL:
+          {{ this.pokemonData[0].stats[4].base_stat }}</mat-card
+        >
+        <mat-card
+          >VELOCIDADE: {{ this.pokemonData[0].stats[5].base_stat }}</mat-card
+        >
       </div>
     </div>
   </div>
