@@ -9,8 +9,6 @@ import { PokeapiService } from 'src/app/services/pokeapi.service';
 export class PokemonListComponent implements OnInit {
   pokemons: any = [];
 
-  @Output() pokeData = new EventEmitter<any>();
-
   constructor(private pokeApi: PokeapiService) {}
 
   getAllPokemon() {
@@ -19,8 +17,8 @@ export class PokemonListComponent implements OnInit {
         this.pokeApi
           .getPokemonData(result.name)
           .subscribe((dataResponse: any) => {
-            this.pokemons.push({ dataResponse, cols: 1, rows: 1 });
-            console.log(this.pokemons);
+            this.pokemons.push(dataResponse);
+            console.log('list', this.pokemons);
           });
       });
     });

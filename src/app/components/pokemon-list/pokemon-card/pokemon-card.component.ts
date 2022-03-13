@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PokeapiService } from 'src/app/services/pokeapi.service';
 
 @Component({
@@ -8,7 +9,24 @@ import { PokeapiService } from 'src/app/services/pokeapi.service';
 })
 export class PokemonCardComponent implements OnInit {
   pokemonDetail: any = [];
-  constructor(private pokeApi: PokeapiService) {}
+  constructor(private pokeApi: PokeapiService, private router: Router) {}
 
-  ngOnInit(): void {}
+  pokeData() {
+    this.pokeApi.getAllPokemon().subscribe((response: any) => {
+      response.results.forEach((result: any) => {
+        this.pokeApi
+          .getPokemonData(result.name)
+          .subscribe((dataResponse: any) => {
+            this.pokemonDetail.push(dataResponse);
+          });
+      });
+    });
+  }
+  goPage(pokemon: any) {
+    this.router.navigate(['/pokemon', pokemon.name]);
+  }
+
+  ngOnInit() {
+    this.pokeData();
+  }
 }

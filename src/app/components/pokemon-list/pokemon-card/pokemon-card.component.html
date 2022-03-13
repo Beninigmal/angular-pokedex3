@@ -1,14 +1,20 @@
-<a routerLink="favoritos">
-  <mat-card class="poke-card">
-    <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title></mat-card-title>
-      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-    </mat-card-header>
-    <img
-      mat-card-image
-      src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-      alt="Photo of a Shiba Inu"
-    />
-  </mat-card>
-</a>
+<mat-card
+  (click)="goPage(pokemon)"
+  class="poke-card"
+  *ngFor="let pokemon of pokemonDetail"
+>
+  <mat-card-header>
+    <mat-card-title>{{ pokemon.name.toUpperCase() }}</mat-card-title>
+    <div class="box-title">
+      <mat-card-subtitle *ngFor="let item of pokemon.types; let size = index">
+        <span *ngIf="size > 0"> </span>
+        {{ item.type.name.toUpperCase() }}
+      </mat-card-subtitle>
+    </div>
+  </mat-card-header>
+  <img
+    mat-card-image
+    src="{{ pokemon.sprites.other['official-artwork'].front_default }}"
+    alt="Photo of a Shiba Inu"
+  />
+</mat-card>
