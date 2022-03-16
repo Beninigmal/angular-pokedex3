@@ -26,6 +26,9 @@ mat-card-title {
   font-family: "Nunito", sans-serif;
   font-weight: 800;
   font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .poke_container {
@@ -40,5 +43,4 @@ mat-card-title {
 pagination-controls {
   font-family: "Nunito";
   font-weight: 800;
-
 }

@@ -1,10 +1,19 @@
 <mat-card
-  (click)="goPage(pokemon)"
   class="poke-card"
-  *ngFor="let pokemon of pokemonDetail  | paginate: {itemsPerPage: 10, currentPage:  page, totalItems: totalPokemon} "
+  *ngFor="
+    let pokemon of pokemonDetail
+      | paginate
+        : { itemsPerPage: 10, currentPage: page, totalItems: totalPokemon }
+  "
 >
   <mat-card-header>
-    <mat-card-title>{{ pokemon.name.toUpperCase() }}</mat-card-title>
+    <mat-card-title
+      >{{ pokemon.name.toUpperCase()
+      }}<mat-icon (click)="setFavorite(pokemon.id)">{{
+        pokemon.favoriteLabel
+      }}</mat-icon></mat-card-title
+    >
+
     <div class="box-title">
       <mat-card-subtitle *ngFor="let item of pokemon.types; let size = index">
         <span *ngIf="size > 0"> </span>
@@ -13,10 +22,14 @@
     </div>
   </mat-card-header>
   <img
+    (click)="goPage(pokemon)"
     mat-card-image
     src="{{ pokemon.sprites.other['official-artwork'].front_default }}"
     alt="Pokemon picture"
   />
 </mat-card>
-<pagination-controls previousLabel="Anterior" nextLabel="Próximo" (pageChange)="page = $event; pokemonDetail = []; pokeData()"></pagination-controls>
-
+<pagination-controls
+  previousLabel="Anterior"
+  nextLabel="Próximo"
+  (pageChange)="page = $event; pokemonDetail = []; pokeData()"
+></pagination-controls>

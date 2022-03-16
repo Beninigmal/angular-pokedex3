@@ -1,17 +1,25 @@
-mat-toolbar{
+mat-toolbar {
   background-color: transparent;
-  .anchor-container{
+  display: flex;
+  justify-content: space-between;
+  .anchor-container {
     text-decoration: none;
+    .example-icon {
+      .pokeball {
+        margin-top: 17px 0 0 0;
+        width: 50px;
+      }
+    }
   }
   position: fixed;
-    .nav-title{
-      font-family: 'Pokemon';
-      font-size: 26px;
-      text-shadow: 0 0 12px rgba(119, 0, 255, 1);
-      color: #fff;
-    }
-  .spacer {
-    flex: 1 1 auto;
-    align-items: center;
+  .nav-title {
+    font-family: "Pokemon";
+    font-size: 26px;
+    text-shadow: 0 0 12px rgba(119, 0, 255, 1);
+    color: #fff;
+  }
+  mat-icon {
+    font-size: 45px;
+    margin: 27px 10px 0 0;
   }
 }

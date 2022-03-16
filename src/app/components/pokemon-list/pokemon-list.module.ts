@@ -6,6 +6,7 @@ import { MaterialModule } from 'src/app/module/material.module';
 import { MatNativeDateModule } from '@angular/material/core';
 import { PokemonDetailComponent } from './pokemon-detail/pokemon-detail.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,13 @@ import { NgxPaginationModule } from 'ngx-pagination';
     PokemonCardComponent,
     PokemonDetailComponent,
   ],
-  imports: [CommonModule, MatNativeDateModule, MaterialModule, NgxPaginationModule],
+  imports: [
+    CommonModule,
+    MatNativeDateModule,
+    MaterialModule,
+    NgxPaginationModule,
+    MatDialogModule,
+  ],
   exports: [PokemonListComponent, PokemonCardComponent, PokemonDetailComponent],
 })
 export class PokemonListModule {}

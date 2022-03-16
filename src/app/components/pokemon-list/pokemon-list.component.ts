@@ -9,8 +9,7 @@ import { PokeapiService } from 'src/app/services/pokeapi.service';
 export class PokemonListComponent implements OnInit {
   pokemons: any = [];
   page: number = 1;
-  totalPokemon: number = 0
-
+  totalPokemon: number = 0;
 
   constructor(private pokeApi: PokeapiService) {}
 
