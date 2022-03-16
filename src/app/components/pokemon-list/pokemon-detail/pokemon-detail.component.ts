@@ -23,7 +23,6 @@ export class PokemonDetailComponent implements OnInit {
 
     this.pokeApi.getDetails(this.pokemonName).subscribe((poke) => {
       this.pokemonData.push(poke);
-      console.log(this.pokemonData[0].stats);
     });
   }
 }

@@ -13,10 +13,9 @@ export class PokemonCardComponent implements OnInit {
   totalPokemon: number = 0;
   favoritePokemons: any = [];
   isFavorite: boolean = false;
-  favoritLabel: string = 'star_border';
+
   uniquePokemon: any = [];
   favoriteUniquePokemons: any = new Set();
-  favorits = JSON.parse(<any>localStorage.getItem('@favorits')) || [];
 
   constructor(private pokeApi: PokeapiService, private router: Router) {}
 
@@ -27,12 +26,7 @@ export class PokemonCardComponent implements OnInit {
         this.pokeApi
           .getPokemonData(result.name)
           .subscribe((dataResponse: any) => {
-            dataResponse = {
-              ...dataResponse,
-              favorite: this.isFavorite,
-              favoritelabel: this.favoritLabel,
-            };
-            this.pokemonDetail.push(dataResponse);
+            this.pokemonDetail.push(this.checkFavorite(dataResponse));
           });
       });
     });
@@ -42,18 +36,25 @@ export class PokemonCardComponent implements OnInit {
   }
 
   //Checa se é favorito e muda a estrela
-  checkFavorite(id: number) {
-    this.pokemonDetail.map((pokemon: any) => {
-      if (pokemon.id === id) {
-        pokemon.favorite = !pokemon.favorite;
-        if (pokemon.favorite === false) {
-          pokemon.favoriteLabel = 'star_border';
-        } else {
-          pokemon.favoriteLabel = 'star';
-        }
-        this.favoritePokemons.push(pokemon);
-      }
-    });
+  checkFavorite(pokemon: any) {
+    let pokeFilter = [];
+    var pokemonStorage: any = localStorage.getItem('@favorits');
+    pokemonStorage = JSON.parse(pokemonStorage);
+
+    if (pokemonStorage) {
+      pokeFilter = pokemonStorage.filter((value: any) => {
+        return value.id === pokemon.id;
+      });
+    }
+    if (pokeFilter.length > 0) {
+      pokemon.favorite = true;
+      pokemon.favoriteLabel = 'star';
+      return pokemon;
+    }
+
+    pokemon.favorite = false;
+    pokemon.favoriteLabel = 'star_border';
+    return pokemon;
   }
   //Remove valores repetidos
   keepUniquePokemonFavorite() {
@@ -63,79 +64,52 @@ export class PokemonCardComponent implements OnInit {
     });
   }
   //Adiciona no LocalStorage
-  addFavoriteLocal() {
-    this.favorits.push(
-      localStorage.setItem('@favorits', JSON.stringify(this.uniquePokemon))
-    );
-    console.log('favorits', this.favorits);
+  addFavoriteLocal(pokemon: any) {
+    var pokemonStorage: any = localStorage.getItem('@favorits');
+    let pokeArr = [];
+
+    if (pokemonStorage) {
+      pokeArr = JSON.parse(pokemonStorage);
+    }
+    pokemon.favorite = true;
+    pokemon.favoriteLabel = 'star';
+
+    pokeArr.push(pokemon);
+
+    const existPokemon = pokeArr.includes(pokemon.id);
+
+    if (existPokemon) return;
+
+    localStorage.setItem('@favorits', JSON.stringify(pokeArr));
   }
 
-  removeFavoriteLocal(id: number) {
-    this.uniquePokemon = this.favorits.filter((favorite: any) => {
-      return favorite.id !== id;
+  removeFavoriteLocal(pokemon: any) {
+    //verificar se o pokemon existe
+    var pokemonStorage: any = localStorage.getItem('@favorits');
+    let pokeArr = [];
+
+    if (pokemonStorage) {
+      pokeArr = JSON.parse(pokemonStorage);
+    }
+    pokemon.favorite = false;
+    pokemon.favoriteLabel = 'star_border';
+
+    const filteredPokemon = pokeArr.filter((favorite: any) => {
+      return pokemon.id !== favorite.id;
     });
 
-    localStorage.setItem('@favorits', JSON.stringify(this.uniquePokemon));
+    localStorage.setItem('@favorits', JSON.stringify(filteredPokemon));
   }
   //Função principal
-  setFavorite(id: number) {
-    this.checkFavorite(id);
-    this.keepUniquePokemonFavorite();
-
-    if (this.favorits.id === id) {
-      this.removeFavoriteLocal(this.favorits);
+  setFavorite(pokemon: any) {
+    if (pokemon.favorite === false) {
+      this.addFavoriteLocal(pokemon);
     } else {
-      this.addFavoriteLocal();
+      this.removeFavoriteLocal(pokemon);
     }
-    console.log(this.favorits.id);
-
-    console.log('set', this.favorits);
   }
-
-  // setFavorite(id: number) {
-  //
-  //   this.pokemonDetail.map((pokemon: any) => {
-  //     if (pokemon.id === id) {
-  //       pokemon.favorite = !pokemon.favorite;
-  //       if (pokemon.favorite === false) {
-  //         pokemon.favoriteLabel = 'star_border';
-  //       } else {
-  //         pokemon.favoriteLabel = 'star';
-  //       }
-  //       this.favoritePokemons.push(pokemon.id);
-
-  //       //-----------Trata pokemons repetidos------------
-  //       const favoriteUniquePokemons: any = new Set();
-  //       this.favoritePokemons.forEach((favorite: number) => {
-  //         favoriteUniquePokemons.add(favorite);
-  //       });
-
-  //       this.uniquePokemon = [...favoriteUniquePokemons.values()];
-  //       //-----------------------------------------------
-
-  //       //------Construir lógica para remover do localStorage-------
-  //       let favorito: any = [];
-  //       JSON.stringify(localStorage.setItem('@favorite', favorito));
-  //       favorito = this.uniquePokemon.filter((favorite: number) => {
-  //         return pokemon.id !== this.uniquePokemon;
-  //       });
-
-  //       if (pokemon.favorite === false) {
-  //         localStorage.removeItem('@favorite');
-  //         localStorage.setItem('@favorite', favorito);
-  //       } else {
-  //         localStorage.setItem('@favorite', JSON.stringify(favorito));
-  //         console.log(favorito);
-  //       }
-  //     }
-  //   });
-
-  // console.log('detail', this.pokemonDetail[id]);
-
-  // console.log('unique', this.uniquePokemon);
 
   ngOnInit() {
     this.pokeData();
-    console.log(this.favorits);
   }
 }
