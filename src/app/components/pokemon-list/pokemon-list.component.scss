@@ -2,10 +2,10 @@
   display: flex;
   justify-content: center;
   background-image: url(../../../assets/image/bg2.png);
+  background-size: contain;
 
   .list-container {
     max-width: 1300px;
-    // height: calc(100vh - 64px);
     height: 100vh;
     display: flex;
     flex-wrap: wrap;
@@ -22,11 +22,11 @@
       flex-wrap: wrap;
     }
 
-    .pagination-container{
+    .pagination-container {
       display: flex;
       flex-direction: column;
-      & button{
-        margin:10px;
+      & button {
+        margin: 10px;
       }
     }
   }

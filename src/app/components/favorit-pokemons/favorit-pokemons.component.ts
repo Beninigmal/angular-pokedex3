@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-favorit-pokemons',
@@ -6,7 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./favorit-pokemons.component.scss'],
 })
 export class FavoritPokemonsComponent implements OnInit {
-  constructor() {}
+  localData = JSON.parse(<any>localStorage.getItem('@favorits'));
+  constructor(private router: Router) {}
 
-  ngOnInit(): void {}
+  goPage(pokemon: any) {
+    this.router.navigate(['/pokemon', pokemon.name]);
+  }
+
+  ngOnInit() {
+    console.log(this.localData.favorite);
+  }
 }

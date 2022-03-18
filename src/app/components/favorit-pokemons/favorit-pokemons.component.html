@@ -1,1 +1,34 @@
-<p>favorit-pokemons works!</p>
+<!-- <section class="container"> -->
+<div class="list-container">
+  <div class="container" *ngFor="let pokemon of localData">
+    <div class="card">
+      <div class="imgBx">
+        <img
+          src="{{ pokemon.sprites.other['official-artwork'].front_default }}"
+        />
+      </div>
+      <div class="contentBx">
+        <h2>{{ pokemon.name.toUpperCase() }}</h2>
+        <div class="size">
+          <h3>Size :</h3>
+          <span>7</span>
+          <span>8</span>
+          <span>9</span>
+          <span>10</span>
+        </div>
+        <div class="color">
+          <h3>Tipo:</h3>
+          <div
+            *ngFor="let item of pokemon.types; let size = index"
+            class="span__type"
+          >
+            <span *ngIf="size > 0"> </span>
+            {{ item.type.name.toUpperCase() }}
+          </div>
+        </div>
+        <a (click)="goPage(pokemon)">Ir ao Pokemon</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- </section> -->

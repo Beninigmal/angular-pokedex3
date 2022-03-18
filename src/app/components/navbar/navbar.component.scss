@@ -2,11 +2,12 @@ mat-toolbar {
   background-color: transparent;
   display: flex;
   justify-content: space-between;
+  margin-top: -6px;
   .anchor-container {
     text-decoration: none;
     .example-icon {
       .pokeball {
-        margin-top: 17px 0 0 0;
+        margin-top: 10px;
         width: 50px;
       }
     }
